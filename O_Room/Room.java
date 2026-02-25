@@ -1,68 +1,42 @@
-package O_Room;
-
-import java.util.*;
+package O_Room
+ import java.util.Scanner;
 
 public abstract class Room implements IRoom {
-
     private String id;
     private String name;
     private double baseCost;
 
-    public Room() {
-    }
+    protected Scanner sc = new Scanner(System.in);
 
-    public Room(String id, String name, double baseCost) {
-        this.id = id;
-        this.name = name;
-        this.baseCost = baseCost;
-    }
+    public String getId() { return id; }
+    public void setId(String id) { this.id = id; }
 
-    // Getter & Setter
-    public String getId() {
-        return id;
-    }
 
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public double getBaseCost() {
-        return baseCost;
-    }
-
-    public void setBaseCost(double baseCost) {
-        this.baseCost = baseCost;
-    }
-
-    public void input() {
-        Scanner sc = new Scanner(System.in);
-
-        System.out.print("Enter room id: ");
+    @Override
+    public void addRoom() {
+        System.out.print("ID: ");
         id = sc.nextLine();
+        inputInfo(); 
+    }
 
-        System.out.print("Enter room name: ");
+
+    public void inputInfo() {
+        System.out.print("Name: ");
         name = sc.nextLine();
-
-        System.out.print("Enter base cost: ");
+        System.out.print("Base cost: ");
         baseCost = sc.nextDouble();
+        sc.nextLine(); // Dọn dẹp bộ nhớ đệm
     }
 
-    public void output() {
-        System.out.println("Room ID: " + id);
-        System.out.println("Room Name: " + name);
-        System.out.println("Base Cost: " + baseCost);
-        System.out.println("Total Cost: " + calculateCost());
+    @Override
+    public void updateRoom() {
+        System.out.println("Updating info for Room ID: " + id);
+        inputInfo();
     }
 
-    public double calculateCost() {
-        return baseCost; // hiện tại chỉ trả về baseCost
+    @Override
+    public void displayDetails() {
+        System.out.print(id + " | " + name + " | " + baseCost); 
     }
-}
+}   
+
