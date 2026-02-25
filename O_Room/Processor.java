@@ -1,90 +1,61 @@
 package O_Room;
-
 import java.util.Scanner;
 
 public class Processor {
-
     public static void main(String[] args) {
-
-        Scanner scanner = new Scanner(System.in);
-        RoomList roomList = new RoomList();
-        int next;
-
-        do {
-
-            System.out.println("\n===== ROOM MANAGEMENT =====");
-            System.out.println("0. Exit program");
-            System.out.println("1. Add a room");
-            System.out.println("2. Update a room");
-            System.out.println("3. Find room by id");
-            System.out.println("4. Delete a room");
-            System.out.println("5. Display all rooms");
-            System.out.println("6. Count each room individually");
+        Scanner sc = new Scanner(System.in);
+        RoomList list = new RoomList();
+        
+        while (true) {
+            System.out.println("1. Add Meeting Room");
+            System.out.println("2. Add Bed Room");
+            System.out.println("3. Update Room");
+            System.out.println("4. Delete Room");
+            System.out.println("5. Find Room");
+            System.out.println("6. Display All");
+            System.out.println("7. Count");
+            System.out.println("0. Exit");
             System.out.print("Choose: ");
+            
+            int c = sc.nextInt(); 
+            sc.nextLine(); // Quét sạch bộ nhớ đệm
 
-            int choice = scanner.nextInt();
-            scanner.nextLine(); // clear buffer
-
-            switch (choice) {
-
-                case 0:
-                    System.out.println("Exit program");
-                    break;
-
+            switch (c) {
                 case 1:
-                    System.out.print("Enter MeetingRoom(1) / BedRoom(2): ");
-                    int type = scanner.nextInt();
-                    scanner.nextLine();
-
-                    if (type == 1) {
-                        MeetingRoom m = new MeetingRoom();
-                        m.addRoom();
-                        roomList.addRoom(m);
-                    } else if (type == 2) {
-                        BedRoom b = new BedRoom();
-                        b.addRoom();
-                        roomList.addRoom(b);
-                    } else {
-                        System.out.println("Invalid type!");
-                    }
-
-                    System.out.println("Success");
+                    MeetingRoom m = new MeetingRoom();
+                    m.addRoom(); // BẮT BUỘC phải gọi hàm nhập dữ liệu
+                    list.addRoom(m);
                     break;
-
                 case 2:
-                    System.out.print("Enter id to update: ");
-                    roomList.updateRoom(scanner.nextLine());
+                    Bedroom b = new Bedroom();
+                    b.addRoom(); // BẮT BUỘC phải gọi hàm nhập dữ liệu
+                    list.addRoom(b);
                     break;
-
                 case 3:
-                    System.out.print("Enter id to find: ");
-                    roomList.findRoomById(scanner.nextLine());
+                    System.out.print("Enter ID to update: ");
+                    // Vì hàm updateRoom trong RoomList trả về void, ta gọi trực tiếp
+                    list.updateRoom(sc.nextLine()); 
                     break;
-
                 case 4:
-                    System.out.print("Enter id to delete: ");
-                    roomList.deleteRoom(scanner.nextLine());
+                    System.out.print("Enter ID to delete: ");
+                    list.deleteRoom(sc.nextLine());
                     break;
-
                 case 5:
-                    System.out.println("All rooms:");
-                    roomList.displayAllRooms();
+                    System.out.print("Enter ID to find: ");
+                    list.findRoomById(sc.nextLine());
                     break;
-
-                case 6:
-                    roomList.countRooms();
+                case 6: 
+                    list.displayAllRooms(); 
                     break;
-
+                case 7: 
+                    list.countRooms(); 
+                    break;
+                case 0: 
+                    System.out.println("Goodbye!");
+                    return;
                 default:
                     System.out.println("Invalid choice!");
             }
-
-            System.out.print("Continue? 1 Yes / 0 No: ");
-            next = scanner.nextInt();
-            scanner.nextLine();
-
-        } while (next != 0);
-
-        scanner.close();
+        }
     }
 }
