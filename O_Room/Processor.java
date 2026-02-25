@@ -1,60 +1,79 @@
-package O_Room;
 import java.util.Scanner;
 
 public class Processor {
+
     public static void main(String[] args) {
+
         Scanner sc = new Scanner(System.in);
         RoomList list = new RoomList();
-        
+
         while (true) {
-            System.out.println("1. Add Meeting Room");
-            System.out.println("2. Add Bed Room");
-            System.out.println("3. Update Room");
-            System.out.println("4. Delete Room");
-            System.out.println("5. Find Room");
-            System.out.println("6. Display All");
-            System.out.println("7. Count");
-            System.out.println("0. Exit");
+
+            System.out.println("1.Add Meeting");
+            System.out.println("2.Add Bed");
+            System.out.println("3.Update");
+            System.out.println("4.Delete");
+            System.out.println("5.Find");
+            System.out.println("6.Display");
+            System.out.println("7.Count");
+            System.out.println("0.Exit");
             System.out.print("Choose: ");
-            
-            int c = sc.nextInt(); 
-            sc.nextLine(); // Quét sạch bộ nhớ đệm
+
+            if (!sc.hasNextInt()) {
+                sc.nextLine();
+                System.out.println("Enter number!");
+                continue;
+            }
+
+            int c = sc.nextInt();
+            sc.nextLine(); // clear buffer
 
             switch (c) {
+
                 case 1:
                     MeetingRoom m = new MeetingRoom();
-                    m.addRoom(); // BẮT BUỘC phải gọi hàm nhập dữ liệu
+                    m.addRoom();
                     list.addRoom(m);
                     break;
+
                 case 2:
-                    Bedroom b = new Bedroom();
-                    b.addRoom(); // BẮT BUỘC phải gọi hàm nhập dữ liệu
+                    BedRoom b = new BedRoom();
+                    b.addRoom();
                     list.addRoom(b);
                     break;
+
                 case 3:
-                    System.out.print("Enter ID to update: ");
-                    // Vì hàm updateRoom trong RoomList trả về void, ta gọi trực tiếp
-                    list.updateRoom(sc.nextLine()); 
+                    System.out.print("ID: ");
+                    if (!list.updateRoomById(sc.nextLine()))
+                        System.out.println("Not found");
                     break;
+
                 case 4:
-                    System.out.print("Enter ID to delete: ");
-                    list.deleteRoom(sc.nextLine());
+                    System.out.print("ID: ");
+                    if (!list.deleteRoomById(sc.nextLine()))
+                        System.out.println("Not found");
                     break;
+
                 case 5:
-                    System.out.print("Enter ID to find: ");
-                    list.findRoomById(sc.nextLine());
+                    System.out.print("ID: ");
+                    Room r = list.findRoomById(sc.nextLine());
+                    if (r != null) r.displayDetails();
+                    else System.out.println("Not found");
                     break;
-                case 6: 
-                    list.displayAllRooms(); 
+
+                case 6:
+                    list.displayAllRooms();
                     break;
-                case 7: 
-                    list.countRooms(); 
+
+                case 7:
+                    list.countRooms();
                     break;
-                case 0: 
-                    System.out.println("Goodbye!");
+
+                case 0:
                     return;
+
                 default:
-                    System.out.println("Invalid choice!");
+                    System.out.println("Invalid choice");
             }
         }
     }
