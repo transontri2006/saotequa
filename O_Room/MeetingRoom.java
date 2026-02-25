@@ -3,8 +3,7 @@ import java.util.Scanner;
 
 public class MeetingRoom extends Room {
     private int capacity;
-
-    // Sử dụng Scanner chung để tối ưu bộ nhớ
+ 
     private Scanner sc = new Scanner(System.in);
 
     @Override
@@ -24,3 +23,4 @@ public class MeetingRoom extends Room {
         System.out.println("Capacity: " + capacity);
     }
 }
+
