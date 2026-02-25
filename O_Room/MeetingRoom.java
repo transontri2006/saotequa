@@ -1,15 +1,21 @@
-package room;
+package O_Room; 
 import java.util.Scanner;
 
 public class MeetingRoom extends Room {
     private int capacity;
 
+    // Sử dụng Scanner chung để tối ưu bộ nhớ
+    private Scanner sc = new Scanner(System.in);
+
     @Override
     public void addRoom() {
-        Scanner sc = new Scanner(System.in);
-        super.addRoom();
+        super.addRoom();        
         System.out.print("Capacity: ");
-        capacity = sc.nextInt();
+      
+        if (sc.hasNextInt()) {
+            capacity = sc.nextInt();
+        }
+        sc.nextLine();
     }
 
     @Override
