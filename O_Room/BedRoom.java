@@ -1,44 +1,25 @@
 package O_Room;
-
 import java.util.Scanner;
 
-public class Bedroom extends Room {
-
-    Scanner scanner = new Scanner(System.in);
+public class BedRoom extends Room {
     private int numberOfBeds;
-
-    public BedRoom() {
-    }
-
-    public BedRoom(String id, String name, double baseCost) {
-        super(id, name, baseCost);
-    }
-
-    public int getNumberOFBed() {
-        return numberOfBeds;
-    }
-
-    public void setNumberOfBeds(int numberOfBeds) {
-        this.numberOfBeds = numberOfBeds;
-    }
+    private Scanner sc = new Scanner(System.in);
 
     @Override
     public void addRoom() {
-        super.addRoom();
-        System.out.print("numberOfBeds:");
-        setNumberOfBeds(scanner.nextInt());
-    }
-
-    @Override
-    public void updateRoom() {
-        super.updateRoom();
-        System.out.print("numberOfBeds:");
-        setNumberOfBeds(scanner.nextInt());
+        super.addRoom(); 
+        
+        System.out.print("Beds: ");
+        if (sc.hasNextInt()) {
+            this.numberOfBeds = sc.nextInt();
+        }
+        sc.nextLine(); // 
     }
 
     @Override
     public void displayDetails() {
-        super.displayDetails();
-        System.out.println(", numberOfBeds: " + getnumberOfBeds());
+        super.displayDetails(); 
+        System.out.println("Beds: " + numberOfBeds);
     }
 }
+
