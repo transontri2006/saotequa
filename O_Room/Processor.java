@@ -9,7 +9,6 @@ public class Processor {
         int choice;
 
         do {
-            System.out.println("\n--- ROOM MANAGEMENT SYSTEM ---");
             System.out.println("1. Add Meeting Room");
             System.out.println("2. Add Bed Room");
             System.out.println("3. Update Room by ID");
@@ -60,4 +59,5 @@ public class Processor {
         } while (choice != 0);
     }
 }
+
 
