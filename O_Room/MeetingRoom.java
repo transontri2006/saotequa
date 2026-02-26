@@ -2,7 +2,9 @@ package O_Room;
 
 public class MeetingRoom extends Room {
     private int capacity; 
-    public MeetingRoom() {} 
+    public MeetingRoom() {
+    }
+    
     public MeetingRoom(String id, String name, double baseCost, int capacity) {
         super(id, name, baseCost);
         this.capacity = capacity;
@@ -33,4 +35,5 @@ public class MeetingRoom extends Room {
         System.out.println(", Capacity: " + getCapacity());
     }
 }
+
 
