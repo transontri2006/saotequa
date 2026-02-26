@@ -3,51 +3,57 @@ package O_Room;
 import java.util.ArrayList;
 
 public class RoomList {
-    private ArrayList<Room> list = new ArrayList<>();
+    private ArrayList<Room> roomList = new ArrayList<>();
 
-    public void addRoom(Room r) {
-        list.add(r);
+    public void addRoom(Room room) {
+        roomList.add(room);
     }
 
-    public boolean updateRoomById(String id) {
-        for (Room r : list) {
-            if (r.getId().equals(id)) {
-                r.updateRoom();
-                return true;
+    public void updateRoomById(String id) {
+        for (Room room : roomList) {
+            if (room.getId().equals(id)) {
+                room.updateRoom();
+                return;
             }
         }
-        return false;
+        System.out.println("Room ID not found: " + id);
     }
 
-    public boolean deleteRoomById(String id) {
-        return list.removeIf(r -> r.getId().equals(id));
+    public void deleteRoomById(String id) {
+        roomList.removeIf(room -> room.getId().equals(id));
     }
 
-    public Room findRoomById(String id) {
-        for (Room r : list) {
-            if (r.getId().equals(id)) return r;
+    public void findRoomById(String id) {
+        for (Room room : roomList) {
+            if (room.getId().equals(id)) {
+                room.displayDetails();
+                return;
+            }
         }
-        return null;
+        System.out.println("Room not found.");
     }
 
     public void displayAllRooms() {
-        if (list.isEmpty()) {
-            System.out.println("Danh sách trống!");
-            return;
-        }
-        for (Room r : list) {
-            r.displayDetails();
-            System.out.println("\n-----------------");
+        if (roomList.isEmpty()) {
+            System.out.println("List is empty.");
+        } else {
+            for (Room room : roomList) {
+                room.displayDetails();
+            }
         }
     }
 
     public void countRooms() {
-        int m = 0, b = 0;
-        for (Room r : list) {
-            if (r instanceof MeetingRoom) m++;
-            else if (r instanceof BedRoom) b++; 
+        int meetingRooms = 0;
+        int bedRooms = 0;
+        for (Room room : roomList) {
+            if (room instanceof MeetingRoom) {
+                meetingRooms++;
+            } else if (room instanceof BedRoom) {
+                bedRooms++;
+            }
         }
-        System.out.println("Meeting Rooms: " + m);
-        System.out.println("Bed Rooms: " + b);
+        System.out.println("Meeting Rooms: " + meetingRooms + ", Bed Rooms: " + bedRooms);
     }
 }
+
