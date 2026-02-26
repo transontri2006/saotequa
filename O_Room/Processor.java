@@ -1,80 +1,63 @@
+package O_Room;
+
 import java.util.Scanner;
 
 public class Processor {
-
     public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        RoomList roomList = new RoomList();
+        int choice;
 
-        Scanner sc = new Scanner(System.in);
-        RoomList list = new RoomList();
+        do {
+            System.out.println("\n--- ROOM MANAGEMENT SYSTEM ---");
+            System.out.println("1. Add Meeting Room");
+            System.out.println("2. Add Bed Room");
+            System.out.println("3. Update Room by ID");
+            System.out.println("4. Delete Room by ID");
+            System.out.println("5. Find Room by ID");
+            System.out.println("6. Display All Rooms");
+            System.out.println("7. Count Rooms");
+            System.out.println("0. Exit");
+            System.out.print("Choice: ");
+            choice = scanner.nextInt();
+            scanner.nextLine();
 
-        while (true) {
-
-            System.out.println("1.Add Meeting");
-            System.out.println("2.Add Bed");
-            System.out.println("3.Update");
-            System.out.println("4.Delete");
-            System.out.println("5.Find");
-            System.out.println("6.Display");
-            System.out.println("7.Count");
-            System.out.println("0.Exit");
-            System.out.print("Choose: ");
-
-            if (!sc.hasNextInt()) {
-                sc.nextLine();
-                System.out.println("Enter number!");
-                continue;
-            }
-
-            int c = sc.nextInt();
-            sc.nextLine(); // clear buffer
-
-            switch (c) {
-
+            switch (choice) {
                 case 1:
-                    MeetingRoom m = new MeetingRoom();
-                    m.addRoom();
-                    list.addRoom(m);
+                    MeetingRoom mr = new MeetingRoom();
+                    mr.addRoom();
+                    roomList.addRoom(mr);
                     break;
-
                 case 2:
-                    BedRoom b = new BedRoom();
-                    b.addRoom();
-                    list.addRoom(b);
+                    BedRoom br = new BedRoom();
+                    br.addRoom();
+                    roomList.addRoom(br);
                     break;
-
                 case 3:
-                    System.out.print("ID: ");
-                    if (!list.updateRoomById(sc.nextLine()))
-                        System.out.println("Not found");
+                    System.out.print("Enter ID to update: ");
+                    roomList.updateRoomById(scanner.nextLine());
                     break;
-
                 case 4:
-                    System.out.print("ID: ");
-                    if (!list.deleteRoomById(sc.nextLine()))
-                        System.out.println("Not found");
+                    System.out.print("Enter ID to delete: ");
+                    roomList.deleteRoomById(scanner.nextLine());
                     break;
-
                 case 5:
-                    System.out.print("ID: ");
-                    Room r = list.findRoomById(sc.nextLine());
-                    if (r != null) r.displayDetails();
-                    else System.out.println("Not found");
+                    System.out.print("Enter ID to find: ");
+                    roomList.findRoomById(scanner.nextLine());
                     break;
-
                 case 6:
-                    list.displayAllRooms();
+                    roomList.displayAllRooms();
                     break;
-
                 case 7:
-                    list.countRooms();
+                    roomList.countRooms();
                     break;
-
                 case 0:
-                    return;
-
+                    System.out.println("Exiting...");
+                    break;
                 default:
-                    System.out.println("Invalid choice");
+                    System.out.println("Invalid choice!");
             }
-        }
+        } while (choice != 0);
     }
 }
+
